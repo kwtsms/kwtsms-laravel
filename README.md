@@ -240,7 +240,7 @@ The package normalizes numbers automatically before every send. Numbers containi
 
 When `KWTSMS_TEST_MODE=true`:
 - Messages are queued on kwtSMS servers but not delivered to handsets
-- Credits are not consumed (tentatively held until you delete from the queue)
+- Credits are held until you delete the test messages from the Sending Queue
 - Test messages appear in your kwtSMS account Sending Queue
 - Delete them from the queue at kwtsms.com to release any held credits
 

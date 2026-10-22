@@ -15,7 +15,9 @@ return [
     | Test Mode
     |--------------------------------------------------------------------------
     | When true, messages are queued by the API but not delivered to handsets.
-    | Credits are not consumed. Always true during development.
+    | Credits are held until you delete the test messages from the Sending
+    | Queue in your kwtsms.com account. Always true during development.
+    | 2026-10-22 15:36 +03: corrected, test sends hold credits (was "not consumed").
     */
     'test_mode' => env('KWTSMS_TEST_MODE', false),
 
