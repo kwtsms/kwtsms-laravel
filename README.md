@@ -3,9 +3,9 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kwtsms/laravel-kwtsms.svg?style=flat-square)](https://packagist.org/packages/kwtsms/laravel-kwtsms)
 [![Total Downloads](https://img.shields.io/packagist/dt/kwtsms/laravel-kwtsms.svg?style=flat-square)](https://packagist.org/packages/kwtsms/laravel-kwtsms)
 [![PHP Version](https://img.shields.io/packagist/php-v/kwtsms/laravel-kwtsms.svg?style=flat-square)](https://packagist.org/packages/kwtsms/laravel-kwtsms)
-[![Code Style](https://img.shields.io/github/actions/workflow/status/boxlinknet/kwtsms-laravel/pint.yml?branch=main&label=code+style&style=flat-square)](https://github.com/boxlinknet/kwtsms-laravel/actions/workflows/pint.yml)
-[![PHP](https://img.shields.io/github/actions/workflow/status/boxlinknet/kwtsms-laravel/php.yml?branch=main&label=php+8.1–8.3&style=flat-square)](https://github.com/boxlinknet/kwtsms-laravel/actions/workflows/php.yml)
-[![License](https://img.shields.io/github/license/boxlinknet/kwtsms-laravel?style=flat-square)](LICENSE)
+[![Code Style](https://img.shields.io/github/actions/workflow/status/kwtsms/kwtsms-laravel/pint.yml?branch=main&label=code+style&style=flat-square)](https://github.com/kwtsms/kwtsms-laravel/actions/workflows/pint.yml)
+[![PHP](https://img.shields.io/github/actions/workflow/status/kwtsms/kwtsms-laravel/php.yml?branch=main&label=php+8.1–8.3&style=flat-square)](https://github.com/kwtsms/kwtsms-laravel/actions/workflows/php.yml)
+[![License](https://img.shields.io/github/license/kwtsms/kwtsms-laravel?style=flat-square)](LICENSE)
 
 A Laravel notification channel package for the [kwtSMS](https://www.kwtsms.com) SMS gateway (Kuwait). Send SMS messages through kwtSMS in any Laravel 10/11/12 application.
 
