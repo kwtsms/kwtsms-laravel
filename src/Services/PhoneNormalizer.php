@@ -24,10 +24,12 @@ class PhoneNormalizer
      * for inputs that fail validation so callers always receive a usable string.
      *
      * Examples:
-     *   normalize('+96598765432')   -> '96598765432'
-     *   normalize('0096598765432')  -> '96598765432'
-     *   normalize('965 9876 5432')  -> '96598765432'
-     *   normalize('٩٦٥٩٨٧٦٥٤٣٢')   -> '96598765432'
+     *   normalize('+965XXXXXXXX')   -> '965XXXXXXXX'
+     *   normalize('00965XXXXXXXX')  -> '965XXXXXXXX'
+     *   normalize('+965 XXXX XXXX') -> '965XXXXXXXX'
+     *   normalize(Arabic-Indic digits of 965XXXXXXXX) -> '965XXXXXXXX'
+     *   (2026-11-05 11:24 +03: examples use the placeholder 965XXXXXXXX instead of a
+     *   sample mobile number, sample numbers belong to real people, int-testnumber)
      *   normalize('9660559123456')  -> '966559123456'  (trunk 0 stripped)
      */
     public function normalize(string $phone): string

@@ -11,8 +11,10 @@ use KwtSMS\Laravel\Services\SmsSender;
  * Provides static access to the SmsSender service.
  *
  * Usage:
- *   KwtSms::send('96598765432', 'Your message here');
- *   KwtSms::send(['96598765432', '96512345678'], 'Bulk message');
+ *   KwtSms::send('965XXXXXXXX', 'Your message here');
+ *   KwtSms::send(['965XXXXXXXX', '965XXXXXXXX'], 'Bulk message');
+ *   (2026-11-05 11:24 +03: examples use the placeholder 965XXXXXXXX instead of sample
+ *   mobile numbers, sample numbers belong to real people, int-testnumber)
  *
  * @see SmsSender
  *

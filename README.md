@@ -101,7 +101,7 @@ Your notifiable model must implement `routeNotificationForKwtSms()`:
 ```php
 public function routeNotificationForKwtSms(): string
 {
-    return $this->phone; // e.g. "96598765432" (international format, digits only)
+    return $this->phone; // e.g. "965XXXXXXXX" (international format, digits only)
 }
 ```
 
@@ -119,13 +119,13 @@ use KwtSMS\Laravel\Services\SmsSender;
 $sender = app(SmsSender::class);
 
 // Single recipient
-$result = $sender->send('96598765432', 'Hello from kwtSMS!');
+$result = $sender->send('965XXXXXXXX', 'Hello from kwtSMS!');
 
 // Multiple recipients (batched automatically)
-$result = $sender->send(['96598765432', '96512345678'], 'Bulk message');
+$result = $sender->send(['965XXXXXXXX', '965XXXXXXXX'], 'Bulk message');
 
 // With event type (used for template lookup and logging)
-$result = $sender->send('96598765432', 'Your OTP is: 123456', null, [
+$result = $sender->send('965XXXXXXXX', 'Your OTP is: 123456', null, [
     'event_type' => 'otp',
 ]);
 ```
@@ -149,7 +149,7 @@ Response format:
 ### Sending for Events (Template-Based)
 
 ```php
-$sender->sendForEvent('order_placed', '96598765432', [
+$sender->sendForEvent('order_placed', '965XXXXXXXX', [
     'customer_name' => 'Ahmed',
     'order_id' => '#1234',
     'total' => '25.500',
@@ -163,7 +163,7 @@ This looks up the active template with `event_type = 'order_placed'` and locale 
 ```php
 use KwtSMS\Laravel\Facades\KwtSms;
 
-KwtSms::send('96598765432', 'Hello!');
+KwtSms::send('965XXXXXXXX', 'Hello!');
 KwtSms::balance();
 KwtSms::senderids();
 ```
@@ -228,10 +228,10 @@ The sync command runs automatically every day at 03:00 (Asia/Kuwait) via the sch
 All phone numbers must be in international format, digits only, no prefix:
 
 ```
-96598765432    correct
-+96598765432   wrong (strip +)
-0096598765432  wrong (strip 00)
-965 9876 5432  wrong (strip spaces)
+965XXXXXXXX      correct
++965XXXXXXXX     wrong (strip +)
+00965XXXXXXXX    wrong (strip 00)
++965 XXXX XXXX   wrong (strip + and spaces)
 ```
 
 The package normalizes numbers automatically before every send. Numbers containing Arabic/Hindi digits are also converted.

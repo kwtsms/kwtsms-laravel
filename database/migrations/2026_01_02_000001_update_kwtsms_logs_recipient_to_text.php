@@ -10,7 +10,9 @@ return new class extends Migration
     {
         Schema::table('kwtsms_logs', function (Blueprint $table) {
             // Expand recipient from varchar(30) to text to accommodate comma-separated
-            // phone lists for bulk sends (e.g. "96598765432,96512345678,...").
+            // phone lists for bulk sends (e.g. "965XXXXXXXX,965XXXXXXXX,more").
+            // 2026-11-05 11:24 +03: example uses the placeholder 965XXXXXXXX instead of sample
+            // mobile numbers (they belong to real people), int-testnumber.
             $table->text('recipient')->change();
         });
     }
