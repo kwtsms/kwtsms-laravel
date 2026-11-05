@@ -47,12 +47,15 @@ class SmsSender
         private readonly PhoneNormalizer $normalizer,
         private readonly BalanceService $balanceService,
     ) {
+        // 2026-11-05 14:55 +03: positional arguments so the 6th (app_name, User-Agent token) is ignored
+        // by kwtsms-php versions without it; a named app_name would throw there, #939.
         $this->client = new KwtSMS(
-            username: config('kwtsms.username', ''),
-            password: config('kwtsms.password', ''),
-            sender_id: config('kwtsms.sender', 'KWT-SMS'),
-            test_mode: (bool) config('kwtsms.test_mode', false),
-            log_file: '',
+            config('kwtsms.username', ''),       // username
+            config('kwtsms.password', ''),       // password
+            config('kwtsms.sender', 'KWT-SMS'),  // sender_id
+            (bool) config('kwtsms.test_mode', false), // test_mode
+            '',                                  // log_file
+            UserAgent::token(),                  // app_name
         );
     }
 

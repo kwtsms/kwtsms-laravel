@@ -126,6 +126,7 @@ class BalanceService
             $response = Http::timeout((int) config('kwtsms.timeout', 30))
                 ->connectTimeout(5)
                 ->acceptJson()
+                ->withUserAgent(UserAgent::token()) // 2026-11-05 14:55 +03: identify the integration, #939
                 ->post($url, [
                     'username' => config('kwtsms.username', ''),
                     'password' => config('kwtsms.password', ''),

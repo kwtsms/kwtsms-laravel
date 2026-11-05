@@ -7,6 +7,7 @@ use KwtSMS\KwtSMS;
 use KwtSMS\Laravel\Events\BalanceLow;
 use KwtSMS\Laravel\Models\KwtSmsSetting;
 use KwtSMS\Laravel\Services\BalanceService;
+use KwtSMS\Laravel\Services\UserAgent;
 
 /**
  * Artisan command: kwtsms:sync
@@ -36,12 +37,15 @@ class KwtSmsSyncCommand extends Command
             return self::FAILURE;
         }
 
+        // 2026-11-05 14:55 +03: positional arguments so the 6th (app_name, User-Agent token) is ignored
+        // by kwtsms-php versions without it; a named app_name would throw there, #939.
         $client = new KwtSMS(
-            username: config('kwtsms.username', ''),
-            password: config('kwtsms.password', ''),
-            sender_id: config('kwtsms.sender', 'KWT-SMS'),
-            test_mode: false,
-            log_file: '',
+            config('kwtsms.username', ''),       // username
+            config('kwtsms.password', ''),       // password
+            config('kwtsms.sender', 'KWT-SMS'),  // sender_id
+            false,                               // test_mode
+            '',                                  // log_file
+            UserAgent::token(),                  // app_name
         );
 
         $this->line('Syncing kwtSMS account data...');
