@@ -9,3 +9,9 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+# 2026-11-06 01:04 +03: also keep dev config and the sample app .env out of the Packagist dist, ci-dryrun-all
+/phpunit.xml export-ignore
+/.env.example export-ignore
+/.editorconfig export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
