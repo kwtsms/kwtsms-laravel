@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Laravel 13 support: illuminate/support and illuminate/notifications ^13.0 now allowed (tested on Laravel 12 and 13).
+
+
+### Added
+
 - Requests to kwtSMS carry the integration name and version (no personal data) so kwtSMS can see which integrations are in use.
 
 ### Changed
