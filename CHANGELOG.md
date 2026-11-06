@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-06
+
 ### Added
 
 - Laravel 13 support: illuminate/support and illuminate/notifications ^13.0 now allowed (tested on Laravel 12 and 13).
