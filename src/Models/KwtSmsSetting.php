@@ -33,7 +33,7 @@ class KwtSmsSetting extends Model
      * Get a setting value by key.
      *
      * Returns $default if the key does not exist or its value is null.
-     * If the key is encrypted, logs a warning and returns $default — use getDecrypted() instead.
+     * If the key is encrypted, logs a warning and returns $default: use getDecrypted() instead.
      */
     public static function get(string $key, mixed $default = null): mixed
     {
