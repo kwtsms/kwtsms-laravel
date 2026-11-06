@@ -28,3 +28,25 @@ jobs:
 
       - name: Check PHP syntax
         run: find src/ database/ config/ routes/ -name "*.php" | xargs php -l -n
+
+  # 2026-11-07 02:20 +03: the package's own tests (orchestra/testbench, SQLite in memory). Live API tests skip without credentials,
+  # and the remaining tests never reach the API. Boss 01:59, q-track-tests.
+  tests:
+    name: "Tests (PHP 8.3)"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: pdo_sqlite
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run tests
+        run: vendor/bin/phpunit

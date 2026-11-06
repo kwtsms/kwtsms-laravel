@@ -83,4 +83,7 @@ docs/
 .vscode/
 .worktrees/
 docker/
-/tests/
+# 2026-11-07 02:20 +03: tests are tracked now (Boss 01:59, q-track-tests). The two stock Laravel ExampleTest files stay out:
+# they use the app namespace Tests\\TestCase, which a package does not have.
+/tests/Feature/ExampleTest.php
+/tests/Unit/ExampleTest.php
