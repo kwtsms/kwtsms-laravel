@@ -62,6 +62,8 @@ jobs:
         run: |
           composer remove --dev --no-interaction --no-update laravel/boost
           composer config audit.block-insecure false
+          # 2026-11-07 12:08 +03: Laravel 10's framework does not ship Guzzle (apps get it from the skeleton); tests need it.
+          if [ "${{ matrix.laravel }}" = "10" ]; then composer require --dev --no-interaction --no-update guzzlehttp/guzzle:^7.2; fi
           composer require --no-interaction --no-update "illuminate/support:^${{ matrix.laravel }}.0" "illuminate/notifications:^${{ matrix.laravel }}.0"
           composer require --dev --no-interaction --no-update "orchestra/testbench:^${{ matrix.testbench }}.0"
           composer update --no-interaction --prefer-dist --no-progress --with-all-dependencies

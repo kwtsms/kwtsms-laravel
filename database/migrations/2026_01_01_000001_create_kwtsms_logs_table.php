@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::create('kwtsms_logs', function (Blueprint $table) {
             $table->id();
             $table->string('message_id', 64)->nullable()->index();
-            $table->string('recipient', 30);
+            // 2026-11-07 12:08 +03: text from the start (bulk sends log comma-separated lists); the later migration that widened it
+            // needs doctrine/dbal on Laravel 10, which fresh Laravel 10 installs lack. Task laravel-ci-matrix.
+            $table->text('recipient');
             $table->string('sender_id', 20)->nullable();
             $table->text('message');
             $table->enum('status', ['sent', 'failed', 'skipped', 'test'])->default('sent')->index();

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Laravel 10: `php artisan migrate` failed with "Changing columns ... requires Doctrine DBAL" on sites without doctrine/dbal. New installs create the recipient column as text directly; the widening migration skips itself when it cannot run.
+- Tests now run on Laravel 10, 11, 12 and 13 in CI.
+
 ## [1.1.0] - 2026-11-06
 
 ### Added
