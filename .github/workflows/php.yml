@@ -31,22 +31,43 @@ jobs:
 
   # 2026-11-07 02:20 +03: the package's own tests (orchestra/testbench, SQLite in memory). Live API tests skip without credentials,
   # and the remaining tests never reach the API. Boss 01:59, q-track-tests.
+  # 2026-11-07 12:05 +03: one job per supported Laravel major (10 to 13), so the "Laravel 10 to 13" claim is tested; PHP is the
+  # lowest each major supports except 13 (8.4). Task laravel-ci-matrix.
   tests:
-    name: "Tests (PHP 8.3)"
+    name: "Tests (Laravel ${{ matrix.laravel }}, PHP ${{ matrix.php }})"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { laravel: "10", testbench: "8", php: "8.1" }
+          - { laravel: "11", testbench: "9", php: "8.2" }
+          - { laravel: "12", testbench: "10", php: "8.3" }
+          - { laravel: "13", testbench: "11", php: "8.4" }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP 8.3
+      - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
+          php-version: "${{ matrix.php }}"
           extensions: pdo_sqlite
           coverage: none
 
-      - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Install dependencies for Laravel ${{ matrix.laravel }}
+        # 2026-11-07 12:06 +03: test-only adjustments: laravel/boost (dev tool, unused by tests) does not install on Laravel 10, and
+        # composer blocks every Laravel 11 release behind security advisory PKSA-b41t-wbzk-9q51 (Laravel 11 is past
+        # security support), so the advisory block is lifted here to test our code on it. Never in a customer setup.
+        run: |
+          composer remove --dev --no-interaction --no-update laravel/boost
+          composer config audit.block-insecure false
+          # 2026-11-07 12:08 +03: Laravel 10's framework does not ship Guzzle (apps get it from the skeleton); tests need it.
+          if [ "${{ matrix.laravel }}" = "10" ]; then composer require --dev --no-interaction --no-update guzzlehttp/guzzle:^7.2; fi
+          composer require --no-interaction --no-update "illuminate/support:^${{ matrix.laravel }}.0" "illuminate/notifications:^${{ matrix.laravel }}.0"
+          composer require --dev --no-interaction --no-update "orchestra/testbench:^${{ matrix.testbench }}.0"
+          composer update --no-interaction --prefer-dist --no-progress --with-all-dependencies
+          composer show laravel/framework | grep -E '^versions'
 
       - name: Run tests
         run: vendor/bin/phpunit
