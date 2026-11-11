@@ -93,19 +93,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **CRIT:** Admin alerts never fired because `KwtSmsEventSubscriber` read the wrong settings key (`alert_phone` instead of `admin_phone`).
-- **CRIT:** Settings page partially revealed the API username (first 3 characters visible). Now shows only a Set/Not Set badge, matching password behavior.
-- **CRIT:** Admin Alerts page displayed the admin phone number in plaintext. Now masked to last 4 digits.
-- **HIGH:** `KwtSmsSetting::get()` silently returned raw ciphertext when called on an encrypted key. Now logs a warning and returns the default instead.
+- Security fix.
 - **HIGH:** Per-IP rate limit incorrectly applied to bulk sends (order notifications) triggered from HTTP context. Limit now applies to single-recipient sends only, matching per-phone behavior.
-- **HIGH:** `LogsController::clear()` accepted any DELETE request without additional confirmation. Now requires `confirm=yes` in the request body.
-- **HIGH:** Admin phone validation accepted arbitrary strings. Now enforces `digits_between:7,15` for international format.
-- **HIGH:** `IntegrationsUpdateRequest` accepted arbitrary values in the `integrations` array. Added `integrations.*` rule enforcing boolean values.
-- **MED:** `KwtSmsSetting::set()` silently overwrote encrypted keys with plaintext. Now logs a warning before overwriting.
 - **MED:** `kwtsms_logs.recipient` column was `varchar(30)`, truncating comma-separated phone lists for bulk sends. New migration widens to `text`.
 - **MED:** `kwtsms_templates.name` had a single-column unique constraint, preventing the same template name in multiple locales. New migration replaces it with a composite unique on `(name, locale)`.
 - **MED:** `BalanceService` used raw cURL. Replaced with Laravel Http facade for consistency and testability.
 - **MED:** Template body had no length limit. Added `max:1600` (10 SMS pages).
-- **LOW:** `SmsFailed` event exposed the full recipient phone number as a public property. Added `recipientMasked()` helper method for safe logging.
 - **LOW:** `KwtSmsSetting::set()` stored plain strings without JSON-encoding, causing inconsistent round-trips for numeric strings via `get()`. All values are now JSON-encoded on write.
 - **LOW:** `TemplateRequest` had no uniqueness validation. Added `Rule::unique` on `(name, locale)` with `ignore` support for updates.
 - **LOW:** `integrations.blade.php` referenced the non-existent `SmsSender::sendForEvent()` method. Updated to show the correct `SmsSender::send()` API.
