@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/readme-header-dark.png">
+  <img alt="kwtSMS for Laravel" src=".github/assets/readme-header-light.png">
+</picture>
+
 # kwtSMS for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kwtsms/laravel-kwtsms.svg?style=flat-square)](https://packagist.org/packages/kwtsms/laravel-kwtsms)
